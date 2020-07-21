@@ -27,6 +27,7 @@ pipeline {
             }
         }
 		stage('Build image') {
+			agent{ label "master"}
 			steps {		
 				sh "docker build -t jovan:1.0"
 			}	
