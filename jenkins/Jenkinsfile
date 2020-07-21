@@ -28,9 +28,7 @@ pipeline {
         }
 		stage('Build image') {
 			steps {		
-				script {
-					def customImage = docker.build("jovan:1.0")		
-				}
+				sh "docker build -t jovan:1.0"
 			}	
 		}
     }
