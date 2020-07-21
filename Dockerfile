@@ -1,3 +1,4 @@
 FROM java:8
-COPY /var/lib/jenkins/workspace/Pipeline/target/my-app-1.0-SNAPSHOT.jar /my-app-1.0-SNAPSHOT.jar
-CMD ["java", "-jar", "/my-app-1.0-SNAPSHOT.jar"]
+COPY my-app-1.0-SNAPSHOT.jar my-app-1.0-SNAPSHOT.jar
+EXPOSE 8083
+CMD ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
