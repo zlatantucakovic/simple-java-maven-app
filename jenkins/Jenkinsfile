@@ -26,5 +26,10 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+	stage('Build image') {
+		script {
+			def customImage = docker.build("jovan:1.0")		
+		}	
+	}
     }
 }
