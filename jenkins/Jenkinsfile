@@ -30,11 +30,7 @@ pipeline {
 			//agent{ label 'master'}
 			agent {
         		docker {
-            		steps {		
-						sh "docker build -t jovan:1.0"
-						//sh "id"
-						//sh "pwd"
-					}	
+            		build 'jovan:1.0'
         		}
    		 	}
 		}
