@@ -11,14 +11,16 @@ pipeline {
 		    }
             steps {
                 sh 'mvn -B -DskipTests clean package'
+				stash includes: 'my-app-1.0-SNAPSHOT.jar', name: 'ARTEFACT'
                 sh 'mvn test'
             }
 		}
 		stage('Build image') {
 			agent{ label 'master'}
-			steps {		
+			steps {	
+				unstash 'ARTEFACT'	
 				sh "docker ps"
 			}	
-	  }
+	  	}
   }
 }
