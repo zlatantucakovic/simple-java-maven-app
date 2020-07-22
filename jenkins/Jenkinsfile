@@ -13,7 +13,7 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
                 sh 'mvn test'
 				sh './jenkins/scripts/deliver.sh'
-				stash includes: 'my-app-1.0-SNAPSHOT.jar', name: 'ARTEFACT'
+				stash includes: 'target/my-app-1.0-SNAPSHOT.jar', name: 'ARTEFACT'
             }
 		}
 		stage('Build image') {
@@ -24,7 +24,9 @@ pipeline {
 				}
 				sh "ls -la ${pwd()}"
 				sh "ls -la ${pwd()}/ARTEFACT"
-				sh "docker ps"
+				script{
+					docker.build "jovan:1.0"				
+				}
 			}	
 	  	}
 	}
