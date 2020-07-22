@@ -22,7 +22,8 @@ pipeline {
 				dir("ARTEFACT"){	
 					unstash 'ARTEFACT'
 				}
-				sh "ls -la ${pwd()}"	
+				sh "ls -la ${pwd()}"
+				sh "ls -la ${pwd()}/ARTEFACT"
 				sh "docker ps"
 			}	
 	  	}
