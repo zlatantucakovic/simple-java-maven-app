@@ -7,7 +7,7 @@ pipeline {
 	        	docker {
 	        	    image 'maven:3-alpine'
 	        	    args '-u root'
-		    	    }
+		    	}
 		    }
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -18,10 +18,13 @@ pipeline {
 		}
 		stage('Build image') {
 			agent{ label 'master'}
-			steps {	
-				unstash 'ARTEFACT'	
+			steps {
+				dir("ARTEFACT"){	
+					unstash 'ARTEFACT'
+				}
+				sh "ls -la ${pwd()}"	
 				sh "docker ps"
 			}	
 	  	}
-  }
+	}
 }
