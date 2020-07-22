@@ -27,12 +27,16 @@ pipeline {
             }
         }
 		stage('Build image') {
-			//agent{ label "master"}
-			steps {		
-				sh "docker build -t jovan:1.0"
-				//sh "id"
-				//sh "pwd"
-			}	
+			//agent{ label 'master'}
+			agent {
+        		docker {
+            		steps {		
+						sh "docker build -t jovan:1.0"
+						//sh "id"
+						//sh "pwd"
+					}	
+        		}
+   		 	}
 		}
     }
 }
