@@ -19,7 +19,7 @@ pipeline {
 		stage('Build image') {
 			agent{ label 'master'}
 			steps {	
-				unstash name: 'ARTEFACT'	
+				unstash 'ARTEFACT'	
 				sh "docker ps"
 			}	
 	  	}
