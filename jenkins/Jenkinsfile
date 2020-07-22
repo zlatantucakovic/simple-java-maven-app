@@ -11,7 +11,7 @@ pipeline {
 		    }
             steps {
                 sh 'mvn -B -DskipTests clean package'
-				stash includes: '/home/fognode/.jenkins/workspace/Pipeline/target/my-app-1.0-SNAPSHOT.jar', name: 'ARTEFACT'
+				stash includes: 'Pipeline/target/my-app-1.0-SNAPSHOT.jar', name: 'ARTEFACT'
                 sh 'mvn test'
             }
 		}
