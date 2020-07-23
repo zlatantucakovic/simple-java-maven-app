@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-		registry = "127.0.0.1:6000"
+		registry = "http://127.0.0.1:6000"
 		registryCredential = 'docker-hub'
 		dockerImage = ''
 	}
