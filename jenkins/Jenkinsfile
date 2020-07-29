@@ -38,6 +38,7 @@ pipeline {
 		stage('Deploy image'){
 			agent{ label 'master' }
 			steps{
+				sh 'docker login'
 				script{
 					docker.withRegistry(registry) {
 						dockerImage = docker.build "jovan:1.0"
