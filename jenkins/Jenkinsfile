@@ -3,6 +3,8 @@ pipeline {
 		registry = "http://128.130.39.40:5000"
 		//registryCredential = 'docker-hub'
 		dockerImage = ''
+		dockerImage2 = ''
+
 	}
 	 
 	agent none
@@ -35,7 +37,7 @@ pipeline {
 				//}
 			}	
 	  	}
-		stage('Deploy image'){
+		stage('Push image') {
 			agent{ label 'master' }
 			steps{
 				sh 'docker login'
@@ -48,6 +50,21 @@ pipeline {
 				}
 			}
 		}
+
+		stage('Deploy image') {
+			agent{ label 'master' }
+			steps{
+				sh 'docker login'
+				script{
+					docker.withRegistry(registry) {
+						dockerImage2 = docker.image("jovan:latest")
+						dockerImage2.pull()
+					}
+				} 
+			}
+		}
+		
+		}
 		//stage('Run image'){
 		//	agent{ label 'master' }
 		//	steps{
@@ -59,7 +76,7 @@ pipeline {
 		//			}
 		//		} //mozda htttpS
 		//		withKubernetes(serverUrl: "https://ip.ip.ip.ip", credentialsId: "kubeadmin") {
-		//			sh 'kubectl run jovan --image=http://128.130.39.40:5000/jovan:2.0 --port=8080'
+		//			sh 'kubectl run jovan --image=http://128.130.39.40:5000/jovan:latest --port=8080'
 		//		}
 		//	}
 		//}
