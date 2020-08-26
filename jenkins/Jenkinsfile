@@ -41,11 +41,27 @@ pipeline {
 				sh 'docker login'
 				script{
 					docker.withRegistry(registry) {
-						dockerImage = docker.build "jovan:2.0"
-						dockerImage.push()
+						dockerImage = docker.build ("jovan")
+						dockerImage.push("${env.BUILD_NUMBER}")
+						dockerImage.push("latest")
 					}
 				}
 			}
 		}
+		//stage('Run image'){
+		//	agent{ label 'master' }
+		//	steps{
+		//		sh 'docker login'
+		//		script{
+		//			docker.withRegistry(registry) {
+		//				dockerImage = docker.build "jovan:2.0"
+		//				dockerImage.push()
+		//			}
+		//		} //mozda htttpS
+		//		withKubernetes(serverUrl: "https://ip.ip.ip.ip", credentialsId: "kubeadmin") {
+		//			sh 'kubectl run jovan --image=http://128.130.39.40:5000/jovan:2.0 --port=8080'
+		//		}
+		//	}
+		//}
 	}	
 }
