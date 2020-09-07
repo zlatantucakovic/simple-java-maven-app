@@ -64,6 +64,21 @@ pipeline {
 			}
 		}
 		
+		stage('Kubernetes deploy') {
+		//	agent {
+		//		kubernetes {
+		//			yaml """
+		//			<A long yaml file>
+		//			"""
+		//		}
+		//	}
+			agent { label 'master' }
+			steps{
+				sh "minikube start"
+//				sh "minikube node add --worker=true"
+			}
+		}
+		
 		
 		//stage('Run image'){
 		//	agent{ label 'master' }
