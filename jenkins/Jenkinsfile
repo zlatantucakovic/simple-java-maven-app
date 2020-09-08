@@ -63,6 +63,25 @@ pipeline {
 				} 
 			}
 		}
+
+		stage('K3d') {
+			agent{ label 'master' }
+			steps{
+				sh 'docker volume create local_registry'
+				sh 'docker container run -d --name registry.localhost -v local_registry:/var/lib/registry --restart always -p 6000:5000 registry:2'
+				sh 'docker pull nginx:latest'
+				sh 'docker tag nginx:latest registry5.localhost:6000/nginx:latest'
+				sh 'docker push registry5.localhost:6000/nginx:latest'
+				sh 'docker network connect k3d-k3s-default registry5.localhost'
+				sh 'k3d create --api-port 6550 --publish 8088:80 --workers 2 --registry-name registry5.localhost --registry-port 6000 --name klaster'
+				sh 'export KUBECONFIG="$(k3d get-kubeconfig --name=\'klaster\')"'
+				sh 'kubectl create deployment nginx --image=nginx'
+				sh 'kubectl create service clusterip nginx --tcp=80:80'
+				sh 'kubectl apply -f proba/ingresscont.yml'
+				sh 'curl localhost:8088/'
+			}
+		}
+
 		
 		stage('Kubernetes deploy') {
 		//	agent {
