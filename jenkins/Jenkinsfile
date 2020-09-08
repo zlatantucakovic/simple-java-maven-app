@@ -82,7 +82,7 @@ pipeline {
 				sh 'kubectl delete service nginx'
 				sh 'kubectl create service clusterip nginx --tcp=80:80'
 				sh 'ls'
-				sh 'kubectl apply -f ./home/fognode/proba/ingresscont.yml'
+				sh 'kubectl apply -f ingresscont.yml'
 				sh 'curl localhost:8088/'
 			}
 		}
