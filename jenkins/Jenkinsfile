@@ -74,6 +74,7 @@ pipeline {
 				sh 'docker tag nginx:latest registry.localhost:6000/nginx:latest'
 				sh 'docker push registry.localhost:6000/nginx:latest'
 				sh 'docker network connect k3d-k3s-default registry.localhost'
+				sh 'k3d delete --name klaster'
 				sh 'k3d create --api-port 6550 --publish 8088:80 --workers 2 --registry-name registry.localhost --registry-port 6000 --name klaster'
 				sh 'export KUBECONFIG="$(k3d get-kubeconfig --name=\'klaster\')"'
 				sh 'kubectl create deployment nginx --image=nginx'
