@@ -77,7 +77,8 @@ pipeline {
 				sh 'export KUBECONFIG="$(k3d get-kubeconfig --name=\'klaster\')"'
 				sh 'kubectl create deployment nginx --image=nginx'
 				sh 'kubectl create service clusterip nginx --tcp=80:80'
-				sh 'kubectl apply -f proba/ingresscont.yml'
+				sh 'ls'
+				sh 'kubectl apply -f ./home/fognode/proba/ingresscont.yml'
 				sh 'curl localhost:8088/'
 			}
 		}
