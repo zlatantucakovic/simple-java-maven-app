@@ -76,7 +76,7 @@ pipeline {
 				sh 'docker network connect k3d-k3s-default registry.localhost'
 				sh 'k3d delete --name klaster'
 				sh 'k3d create --api-port 6552 --publish 8089:80 --workers 2 --registry-name registry.localhost --registry-port 6000 --name klaster'
-				sh 'export KUBECONFIG="$(k3d get-kubeconfig --name=\'klaster\')"'
+				sh 'export KUBECONFIG="$(k3d get-kubeconfig --name="klaster")"'
 				sh 'kubectl delete deployment nginx'
 				sh 'kubectl create deployment nginx --image=nginx'
 				sh 'kubectl delete service nginx'
