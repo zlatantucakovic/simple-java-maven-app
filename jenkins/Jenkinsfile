@@ -75,7 +75,7 @@ pipeline {
 				sh 'docker push registry.localhost:6000/nginx:latest'
 				sh 'docker network connect k3d-k3s-default registry.localhost'
 				sh 'k3d delete --name klaster'
-				sh 'k3d create --api-port 6552 --publish 8088:80 --workers 2 --registry-name registry.localhost --registry-port 6000 --name klaster'
+				sh 'k3d create --api-port 6552 --publish 8089:80 --workers 2 --registry-name registry.localhost --registry-port 6000 --name klaster'
 				sh 'export KUBECONFIG="$(k3d get-kubeconfig --name=\'klaster\')"'
 				sh 'kubectl delete deployment nginx'
 				sh 'kubectl create deployment nginx --image=nginx'
@@ -83,7 +83,7 @@ pipeline {
 				sh 'kubectl create service clusterip nginx --tcp=80:80'
 				sh 'ls'
 				sh 'kubectl apply -f ingresscont.yml'
-				sh 'curl localhost:8088/'
+				sh 'curl localhost:8089/'
 			}
 		}
 
