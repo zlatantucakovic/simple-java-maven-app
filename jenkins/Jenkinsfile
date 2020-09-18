@@ -71,7 +71,7 @@ pipeline {
 			steps{
 				sh 'docker volume create local_registry'
 				sh 'docker container rm -f registry.localhost'
-				sh 'docker container run -d --name registry.localhost -v local_registry:/var/lib/registry --restart always -p 6000:5000 registry:2'
+				sh 'docker container run -d --name registry.localhost -v local_registry:/var/lib/registry --restart always -p 7000:5000 registry:2'
 				sh 'docker pull nginx:latest'
 				sh 'docker tag nginx:latest registry.localhost:7000/nginx:latest'
 				sh 'docker push registry.localhost:7000/nginx:latest'
