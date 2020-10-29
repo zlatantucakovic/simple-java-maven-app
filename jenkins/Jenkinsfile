@@ -1,8 +1,8 @@
 pipeline {
 	environment {
 		//registry = "http://128.130.39.40:5000" 
-		registry = "http://127.0.0.1:6000" 
-
+		//registry = "http://127.0.0.1:6000" 
+		registry= "zlatantucakovic/jovan"
 		registryCredential = 'dockerhub'
 		dockerImage = ''
 		dockerImage2 = ''
@@ -44,7 +44,7 @@ pipeline {
 			steps{
 				sh 'docker login'
 				script{
-					docker.withRegistry(registry) {
+'					docker.withRegistry('', registryCredential) {
 						dockerImage = docker.build ("jovan")
 						dockerImage.push("${env.BUILD_NUMBER}")
 						dockerImage.push("latest")
