@@ -42,7 +42,7 @@ pipeline {
 		stage('Push image') {
 			agent{ label 'master' }
 			steps{
-				sh 'docker login'
+				//sh 'docker login'
 				script{
 					docker.withRegistry() {
 						dockerImage = docker.build ("jovan")
@@ -56,7 +56,7 @@ pipeline {
 		stage('Deploy image') {
 			agent{ label 'master' }
 			steps{
-				//sh 'docker login'
+				sh 'docker login'
 				script{
 					docker.withRegistry(registry) {
 						dockerImage2 = docker.image("jovan:latest")
