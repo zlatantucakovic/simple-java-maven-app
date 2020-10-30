@@ -34,9 +34,9 @@ pipeline {
 				}
 				sh "ls -la ${pwd()}"
 				sh "ls -la ${pwd()}/ARTEFACT"
-				//script{
-				//	dockerImage = docker.build "jovan:1.0"				
-				//}
+				script{
+					dockerImage = docker.build "jovan:1.0"				
+				}
 			}	
 	  	}
 		stage('Push image') {
