@@ -48,26 +48,27 @@ pipeline {
 				sh "docker tag jovan:1.0 registry5.localhost:6000/jovan:latest"
 				sh "docker push registry5.localhost:6000/jovan:latest"
 				//sh 'docker login'
-				script{
-					docker.withRegistry(registry) {
-						dockerImage = docker.build ("jovan")
-						dockerImage.push("${env.BUILD_NUMBER}")
-						dockerImage.push("latest")
-					}
-				}
+//				script{
+//					docker.withRegistry(registry) {
+//						dockerImage = docker.build ("jovan")
+//						dockerImage.push("${env.BUILD_NUMBER}")
+//						dockerImage.push("latest")
+//					}
+//				}
 			}
 		}
 
-		stage('Deploy image') {
+		stage('Pull image') {
 			agent{ label 'master' }
 			steps{
-				sh 'docker login'
-				script{
-					docker.withRegistry(registry) {
-						dockerImage2 = docker.image("jovan:latest")
-						dockerImage2.pull()
-					}
-				} 
+				sh "docker pull registry5.localhost:6000/jovan:latest"
+				//sh 'docker login'
+				//script{
+				//	docker.withRegistry(registry) {
+				//		dockerImage2 = docker.image("jovan:latest")
+				//		dockerImage2.pull()
+				//	}
+				//} 
 			}
 		}
 
