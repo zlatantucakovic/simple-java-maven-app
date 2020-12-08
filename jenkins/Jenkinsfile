@@ -61,14 +61,14 @@ pipeline {
 		stage('Pull image') {
 			agent{ label 'master' }
 			steps{
-				sh "docker pull registry.localhost:5000/jovan:latest"
+				//sh "docker pull registry.localhost:5000/jovan:latest"
 				//sh 'docker login'
-				//script{
-				//	docker.withRegistry(registry) {
-				//		dockerImage2 = docker.image("jovan:latest")
-				//		dockerImage2.pull()
-				//	}
-				//} 
+				script{
+					docker.withRegistry(registry) {
+						dockerImage2 = docker.image("jovan:latest")
+						dockerImage2.pull()
+					}
+				} 
 			}
 		}
 
