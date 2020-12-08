@@ -43,18 +43,18 @@ pipeline {
 		stage('Push image') {
 			agent{ label 'master' }
 			steps{
-				sh "docker tag jovan:1.0 registry.localhost:5000/jovan:${env.BUILD_NUMBER}"
-				sh "docker push registry.localhost:5000/jovan:${env.BUILD_NUMBER}"
-				sh "docker tag jovan:1.0 registry.localhost:5000/jovan:latest"
-				sh "docker push registry.localhost:5000/jovan:latest"
+				//sh "docker tag jovan:1.0 registry.localhost:5000/jovan:${env.BUILD_NUMBER}"
+				//sh "docker push registry.localhost:5000/jovan:${env.BUILD_NUMBER}"
+				//sh "docker tag jovan:1.0 registry.localhost:5000/jovan:latest"
+				//sh "docker push registry.localhost:5000/jovan:latest"
 				//sh 'docker login'
-//				script{
-//					docker.withRegistry(registry) {
-//						dockerImage = docker.build ("jovan")
-//						dockerImage.push("${env.BUILD_NUMBER}")
-//						dockerImage.push("latest")
-//					}
-//				}
+				script{
+					docker.withRegistry(registry) {
+						dockerImage = docker.build ("jovan")
+						dockerImage.push("${env.BUILD_NUMBER}")
+						dockerImage.push("latest")
+					}
+				}
 			}
 		}
 
