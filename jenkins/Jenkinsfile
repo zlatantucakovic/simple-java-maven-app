@@ -126,7 +126,7 @@ pipeline {
 		//				dockerImage.push()
 		//			}
 		//		} //mozda htttpS
-				withKubernetes(serverUrl: "https://192.168.49.2:8443", credentialsId: "minikube-config-file") {
+				withKubernetes(serverUrl: "https://192.168.49.2:8443", credentialsId: "minikube-config-1") {
 					sh 'kubectl run jovan --image=http://128.131.58.63:5000/jovan:latest --port=8080'
 				}
 			}
