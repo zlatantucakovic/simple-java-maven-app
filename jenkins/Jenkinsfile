@@ -119,8 +119,10 @@ pipeline {
 		stage('Run image'){
 			agent{ label 'master' }
 			steps{
-				sh 'minikube unpause'
-				sh 'minikube pause'
+				sh 'kubectl get nodes'
+				sh 'kubectl config view'
+				//sh 'minikube unpause'
+				//sh 'minikube pause'
 		//		sh 'docker login'
 		//		script{
 		//			docker.withRegistry(registry) {
