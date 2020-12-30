@@ -119,6 +119,7 @@ pipeline {
 		stage('Run image'){
 			agent{ label 'master' }
 			steps{
+				sh 'pwd'
 				sh 'kubectl get nodes'
 				sh 'kubectl config view'
 				//sh 'minikube unpause'
