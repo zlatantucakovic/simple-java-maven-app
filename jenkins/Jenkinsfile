@@ -119,7 +119,7 @@ pipeline {
 		stage('Run image'){
 			agent{ label 'master' }
 			steps{
-				minikube start
+				sh 'minikube start --nodes=2'
 		//		sh 'docker login'
 		//		script{
 		//			docker.withRegistry(registry) {
