@@ -120,6 +120,7 @@ pipeline {
 			agent{ label 'master' }
 			steps{
 				sh 'pwd'
+				sh 'kubectl version'
 				sh 'kubectl get nodes'
 				sh 'kubectl config view'
 				//sh 'minikube unpause'
