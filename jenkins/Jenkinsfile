@@ -121,9 +121,10 @@ pipeline {
 			steps{
 				sh 'pwd'
 				sh 'export PATH="$HOME/go/bin/:$PATH"'
-				sh 'kubectl version'
-				sh 'kubectl get nodes'
-				sh 'kubectl config view'
+				//sh 'kubectl version'
+				//sh 'kubectl get nodes'
+				//sh 'kubectl config view'
+				sh 'minikube start'
 				//sh 'minikube unpause'
 				//sh 'minikube pause'
 		//		sh 'docker login'
