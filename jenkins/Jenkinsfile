@@ -119,7 +119,7 @@ pipeline {
 		stage('Run image'){
 			agent{ label 'master' }
 			steps{
-				sh 'pwd'
+				//sh 'pwd'
 				//sh 'export PATH="$HOME/go/bin/:$PATH"'
 				//sh 'kubectl version'
 				//sh 'kubectl get nodes'
@@ -127,6 +127,7 @@ pipeline {
 				//sh 'minikube start'
 				//sh 'minikube unpause'
 				//sh 'minikube pause'
+				sh 'kubectl config view'
 		//		sh 'docker login'
 		//		script{
 		//			docker.withRegistry(registry) {
@@ -134,9 +135,9 @@ pipeline {
 		//				dockerImage.push()
 		//			}
 		//		} //mozda htttpS
-				withKubernetes(serverUrl: "https://192.168.49.2:9000", credentialsId: "kubbb2") {
-					sh 'kubectl run jovan --image=http://128.131.58.63:5000/jovan:latest --port=8080'
-				}
+				//withKubernetes(serverUrl: "https://192.168.49.2:9000", credentialsId: "kubbb2") {
+				//	sh 'kubectl run jovan --image=http://128.131.58.63:5000/jovan:latest --port=8080'
+				//}
 			}
 		}
 	}	
