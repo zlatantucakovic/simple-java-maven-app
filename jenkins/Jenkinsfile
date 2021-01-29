@@ -127,7 +127,12 @@ pipeline {
 				//sh 'minikube start'
 				//sh 'minikube unpause'
 				//sh 'minikube pause'
+				sh 'pwd'
+				sh 'cd /root/newfolder'
+				sh 'pwd'
+				sh 'ls'
 				sh 'kubectl config view'
+				sh 'kubectl apply -f myweb.yaml'
 		//		sh 'docker login'
 		//		script{
 		//			docker.withRegistry(registry) {
