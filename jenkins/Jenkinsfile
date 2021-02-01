@@ -1,7 +1,7 @@
 pipeline {
 	environment {
 		//registry = "http://128.130.39.40:5000" 
-		registry = "http://128.131.58.63:5000" 
+		registry = "http://128.131.58.68:5000" 
 		//registry= "zlatantucakovic/jovan"
 		registryCredential = 'dockerhub'
 		dockerImage = ''
