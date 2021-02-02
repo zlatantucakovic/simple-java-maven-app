@@ -32,7 +32,7 @@ pipeline {
 				}
 				sh "ls -la ${pwd()}"
 				sh "ls -la ${pwd()}/ARTEFACT"
-				sh 'docker build -t jovan:1.0 .'
+				sh 'docker build -t example:1.0 .'
 			}	
 	  	}
 		stage('Push image to the registry') {
@@ -40,7 +40,7 @@ pipeline {
 			steps{
 				script{
 					docker.withRegistry(registry) {
-						dockerImage = docker.build ("jovan")
+						dockerImage = docker.build ("example")
 						dockerImage.push("${env.BUILD_NUMBER}")
 						dockerImage.push("latest")
 					}
@@ -53,7 +53,7 @@ pipeline {
 			steps{
 				script{
 					docker.withRegistry(registry) {
-						dockerImage2 = docker.image("jovan:latest")
+						dockerImage2 = docker.image("example:latest")
 						dockerImage2.pull()
 					}
 				} 
