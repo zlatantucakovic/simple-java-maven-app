@@ -30,14 +30,11 @@ pipeline {
 				dir("ARTEFACT"){	
 					unstash 'ARTEFACT'
 				}
-				//sh "ls -la ${pwd()}"
-				//sh "ls -la ${pwd()}/ARTEFACT"
 				script{
 					docker.withRegistry(registry) {
 						dockerImage = docker.build ("example")
 					}
 				}
-				//sh 'docker build -t example:1.0 .'
 			}	
 	  	}
 		stage('Push image to the registry') {
@@ -45,7 +42,6 @@ pipeline {
 			steps{
 				script{
 					docker.withRegistry(registry) {
-						//dockerImage = docker.build ("example")
 						dockerImage.push("${env.BUILD_NUMBER}")
 						dockerImage.push("latest")
 					}
