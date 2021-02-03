@@ -48,7 +48,6 @@ pipeline {
 				}
 			}
 		}
-
 		stage('Pull image from the registry') {
 			agent{ label 'master' }
 			steps{
@@ -60,7 +59,6 @@ pipeline {
 				} 
 			}
 		}
-		
 		stage('Deploy the image'){
 			agent{ label 'master' }
 			steps{
@@ -68,7 +66,6 @@ pipeline {
 				sh 'ls'
 				sh 'kubectl config view'
 				sh 'kubectl apply -f myweb.yaml'
-		
 			}
 		}
 	}	
