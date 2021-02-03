@@ -30,8 +30,8 @@ pipeline {
 				dir("ARTEFACT"){	
 					unstash 'ARTEFACT'
 				}
-				sh "ls -la ${pwd()}"
-				sh "ls -la ${pwd()}/ARTEFACT"
+				//sh "ls -la ${pwd()}"
+				//sh "ls -la ${pwd()}/ARTEFACT"
 				sh 'docker build -t example:1.0 .'
 			}	
 	  	}
@@ -40,7 +40,7 @@ pipeline {
 			steps{
 				script{
 					docker.withRegistry(registry) {
-						dockerImage = docker.build ("example")
+						//dockerImage = docker.build ("example")
 						dockerImage.push("${env.BUILD_NUMBER}")
 						dockerImage.push("latest")
 					}
