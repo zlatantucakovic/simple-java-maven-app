@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: myweb
-  name: myweb
+  name: myweb-deployment
 spec:
   replicas: 3
   selector:
@@ -19,6 +19,8 @@ spec:
       - image: 128.131.58.68:5000/example:latest
         imagePullPolicy: Always
         name: myweb
+        ports:
+        - containerPort:80
 
 ---
 apiVersion: v1
@@ -26,7 +28,7 @@ kind: Service
 metadata:
   labels:
     app: myweb
-  name: myweb
+  name: myweb-service
 spec:
   ports:
   - nodePort: 32223
