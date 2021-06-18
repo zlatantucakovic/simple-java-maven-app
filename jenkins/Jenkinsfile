@@ -50,6 +50,23 @@ pipeline {
 				}
 			}
 		}
+		stage('Clone Git repo') {
+                	agent { label 'buildz' }
+            		steps {
+                
+		                sh 'pwd'
+                		sh "curl ifconfig.me"
+                
+		                git(
+	        	            	url: 'https://github.com/zlatantucakovic/simple-java-maven-app',
+                	    		//credentialsId: 'github-credentials',
+                    			branch: "master"
+        		        )
+                
+		                // sh 'git clone https://github.com/tuw-cpsg/fog_infrastructure'
+            		}
+       		}
+
 		stage('Pull image from the registry') {
 			agent{ label 'northstar' }
 //			agent{ label 'master' }
