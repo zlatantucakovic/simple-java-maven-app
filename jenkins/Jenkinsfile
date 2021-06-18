@@ -51,7 +51,7 @@ pipeline {
 			}
 		}
 		stage('Pull image from the registry') {
-//			agent{ label 'northstar' }
+			agent{ label 'northstar' }
 //			agent{ label 'master' }
 			steps{
 				script{
@@ -63,7 +63,7 @@ pipeline {
 			}
 		}
 		stage('Deploy the image'){
-//			agent{ label 'northstar' }
+			agent{ label 'northstar' }
 //			agent{ label 'master' }
 			steps{
 				sh 'pwd'
