@@ -16,7 +16,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: 128.131.58.67:5000/example:latest
+      - image: 128.131.58.67:5000/nginx:latest
         imagePullPolicy: Always
         name: myweb
         ports:
