@@ -7,7 +7,7 @@ pipeline {
 
 	}
 	 
-	agent none
+	agent any
 	
 	stages {
 		stage('Build') {
@@ -25,7 +25,7 @@ pipeline {
 			}
 		}
 		stage('Build image') {
-			agent{ label 'master' }
+			agent{ label 'puck' }
 			steps {
 				dir("ARTEFACT"){	
 					unstash 'ARTEFACT'
@@ -38,7 +38,7 @@ pipeline {
 			}	
 	  	}
 		stage('Push image to the registry') {
-			agent{ label 'master' }
+			agent{ label 'puck' }
 			steps{
 				script{
 					docker.withRegistry(registry) {
@@ -49,7 +49,7 @@ pipeline {
 			}
 		}
 		stage('Pull image from the registry') {
-			agent{ label 'master' }
+			agent{ label 'northstar' }
 			steps{
 				script{
 					docker.withRegistry(registry) {
@@ -60,7 +60,7 @@ pipeline {
 			}
 		}
 		stage('Deploy the image'){
-			agent{ label 'master' }
+			agent{ label 'northstar' }
 			steps{
 				sh 'pwd'
 				sh 'ls'
