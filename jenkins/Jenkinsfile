@@ -42,12 +42,14 @@ pipeline {
 			agent{ label 'puck' }
 //			agent{ label 'master' }
 			steps{
+				sh 'curl https://128.131.58.67:5000/v2/example/tags/list'
 				script{
 					docker.withRegistry(registry) {
 						dockerImage.push("${env.BUILD_NUMBER}")
 						dockerImage.push("latest")
 					}
 				}
+				sh 'curl https://128.131.58.67:5000/v2/example/tags/list'
 			}
 		}
 		stage('Clone Git repo') {
